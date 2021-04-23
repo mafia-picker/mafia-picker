@@ -39,22 +39,24 @@
     <button onClick='newGame()'>بازی جدید</button>
   </div>
   <script>
-  function shuffle(array) {
-    let counter = array.length;
+  function shuffle(array, numberOfshuffles) {
+  	for(var i = 0 ; i < numberOfshuffles ; i++){
+	    let counter = array.length;
 
-    // While there are elements in the array
-    while (counter > 0) {
-      // Pick a random index
-      let index = Math.floor(Math.random() * counter);
+	    // While there are elements in the array
+	    while (counter > 0) {
+	      // Pick a random index
+	      let index = Math.floor(Math.random() * counter);
 
-      // Decrease counter by 1
-      counter--;
+	      // Decrease counter by 1
+	      counter--;
 
-      // And swap the last element with it
-      let temp = array[counter];
-      array[counter] = array[index];
-      array[index] = temp;
-    }
+	      // And swap the last element with it
+	      let temp = array[counter];
+	      array[counter] = array[index];
+	      array[index] = temp;
+	    }
+	}
 
     return array;
   }
@@ -67,7 +69,7 @@
       var roleN = roleLi.children[0].children[1].value || 0
       for (var i = 0; i < roleN; i++) players.push(role)
     }
-    document.getElementById('players').innerHTML = shuffle(players).map(function (role) {
+    document.getElementById('players').innerHTML = shuffle(players, 5).map(function (role) {
       return '<li >' + "شماره " + counter++ + " - " +   '<b>' + role + '</b></li>'
     }).join('')
     document.getElementById('panel1').className = 'hidden'
