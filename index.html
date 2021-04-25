@@ -10,14 +10,17 @@
     display: none;
   }
   input[type=number]{
-    width: 110px;
+    width: 150px;
 	} 
+	li{
+		margin: 10px;
+	}
   </style>
 </head>
 <body dir="rtl" style="background: url('img/mafia.jpg') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
-  <div style="width:250px; margin:0 auto; color: red;"  id='panel1'>
+  <div style="width:350px; margin:0 auto; color: red;"  id='panel1'>
     <ul id='roleTypes'>
-      <li><label><span>رییس مافیا</span>: <input size="10" style="float:left;" type='number' value="1" /></label></li>
+      <li><label><span>رییس مافیا</span>: <input style="float:left;" type='number' value="1" /></label></li>
       <li><label><span>مافیا</span>: <input style="float:left;" type='number' value="2" /></label></li>
       <li><label><span>کاراگاه</span>: <input style="float:left;" type='number' value = "1" /></label></li>
       <li><label><span>پزشک</span>: <input style="float:left;" type='number' value = "1" /></label></li>
@@ -32,13 +35,21 @@
       <li><label><span>تکاور</span>: <input style="float:left;" type='number' value = "0"/></label></li>
     </ul>
     <button onClick='assignRoles()'>دریافت نتایج</button>
+    <button style="float: left" onClick='addRole()'>اضافه کردن نقش جدید</button>
   </div>
-  <div style="width:300px; margin:0 auto; color: red;"  id='panel2' class='hidden'>
+  <div style="width:400px; margin:0 auto; color: red;"  id='panel2' class='hidden'>
     <ul id='players'>
     </ul>
     <button onClick='newGame()'>بازی جدید</button>
   </div>
   <script>
+  	function addRole(){
+  		  var label = prompt("نقش جدید را وارد کنید");
+  		  var ul = document.getElementById("roleTypes");
+  		  var li = document.createElement("li");
+  		  li.innerHTML = '<label><span>' + label + '</span>: <input style="float:left;" type="number" value = "0"/></label>';
+		  ul.appendChild(li);
+  	}
   function shuffle(array, numberOfshuffles) {
   	for(var i = 0 ; i < numberOfshuffles ; i++){
 	    let counter = array.length;
@@ -70,7 +81,7 @@
       for (var i = 0; i < roleN; i++) players.push(role)
     }
     document.getElementById('players').innerHTML = shuffle(players, 5).map(function (role) {
-      return '<li >' + "شماره " + counter++ + " - " +   '<b>' + role + '</b></li>'
+      return '<li >' + "شماره " + counter++ + " - " +   '<b>' + role + '</b> <input placeholder="نام بازیکن" style="float:left;" /></li>'
     }).join('')
     document.getElementById('panel1').className = 'hidden'
     document.getElementById('panel2').className = ''
