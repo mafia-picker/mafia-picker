@@ -36,6 +36,9 @@
     </ul>
     <button onClick='assignRoles()'>دریافت نتایج</button>
     <button style="float: left" onClick='addRole()'>اضافه کردن نقش جدید</button>
+    <div style="margin-top: 10px;">
+    	<textarea id="names" rows="15" cols="41" placeholder="اسامی بازیکنان(هر خط نام یک بازیکن)"></textarea>
+	</div>
   </div>
   <div style="width:400px; margin:0 auto; color: red;"  id='panel2' class='hidden'>
     <ul id='players'>
@@ -75,20 +78,28 @@
   function assignRoles() {
     var players = []
     var counter = 1;
+    var names = document.getElementById('names').value.trim().split(/[,\r?\n]+/);
     for (roleLi of document.getElementById('roleTypes').children) {
       var role = roleLi.children[0].children[0].innerText
       var roleN = roleLi.children[0].children[1].value || 0
       for (var i = 0; i < roleN; i++) players.push(role)
     }
+	if(names.length > 1 && names.length != players.length){
+		alert("تعداد نقش ها با تعداد اسامی برابر نیست");
+		return;
+	}
     document.getElementById('players').innerHTML = shuffle(players, 5).map(function (role) {
-      return '<li >' + "شماره " + counter++ + " - " +   '<b>' + role + '</b> <input placeholder="نام بازیکن" style="float:left;" /></li>'
+    	if(names.length == players.length)
+    		return '<li >' + names[counter++ - 1]  + " - " +   '<b>' + role + '</b></li>'
+    	else 
+      		return '<li >' + "شماره " + counter++ + " - " +   '<b>' + role + '</b> <input placeholder="نام بازیکن" style="float:left;" /></li>'
     }).join('')
     document.getElementById('panel1').className = 'hidden'
     document.getElementById('panel2').className = ''
   }
 
   function newGame() {
-    if (!confirm('New Game?')) return;
+    if (!confirm('بازی جدید?')) return;
     document.getElementById('panel1').className = ''
     document.getElementById('panel2').className = 'hidden'
   }
