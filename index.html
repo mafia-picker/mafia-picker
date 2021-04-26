@@ -44,6 +44,9 @@
     <ul id='players'>
     </ul>
     <button onClick='newGame()'>بازی جدید</button>
+    <div style="margin-top: 10px;">
+    	<textarea rows="15" cols="47" placeholder="یاد داشت ها"></textarea>
+	</div>
   </div>
   <script>
   	function addRole(){
@@ -92,9 +95,9 @@
 	}
     document.getElementById('players').innerHTML = shuffle(players, 5).map(function (role) {
     	if(names.length == players.length)
-    		return '<li >' + names[counter++ - 1]  + " - " +   '<b>' + role + '</b></li>'
+    		return '<li >' + names[counter++ - 1]  + " - " +   '<b>' + role + '</b><input placeholder="توضیحات" style="float:left;" /></li>'
     	else 
-      		return '<li >' + "شماره " + counter++ + " - " +   '<b>' + role + '</b> <input placeholder="نام بازیکن" style="float:left;" /></li>'
+      		return '<li >' + "شماره " + counter++ + " - " +   '<b>' + role + '</b><input placeholder="توضیحات" style="float:left;" /></li>'
     }).join('')
     document.getElementById('panel1').className = 'hidden'
     document.getElementById('panel2').className = ''
