@@ -48,6 +48,8 @@
   <script>
   	function addRole(){
   		  var label = prompt("نقش جدید را وارد کنید");
+  		  if (label == null || label == "")
+  		  	return;
   		  var ul = document.getElementById("roleTypes");
   		  var li = document.createElement("li");
   		  li.innerHTML = '<label><span>' + label + '</span>: <input style="float:left;" type="number" value = "0"/></label>';
